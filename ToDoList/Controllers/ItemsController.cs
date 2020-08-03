@@ -95,6 +95,22 @@ namespace ToDoList.Controllers
       return RedirectToAction("Index");
     }
 
+    [HttpPost]
+    public ActionResult ItemDone(int id)
+    {
+      var thisItem = _db.Items.FirstOrDefault(items => items.ItemId == id);
+      if(thisItem.Done)
+      {
+        thisItem.Done = false;
+      }
+      else
+      {
+        thisItem.Done = true;
+      }
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+
     public ActionResult Delete(int id)
     {
       var thisItem = _db.Items.FirstOrDefault(items => items.ItemId == id);
